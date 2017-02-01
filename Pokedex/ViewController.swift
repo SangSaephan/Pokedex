@@ -41,7 +41,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var pokemon: Pokemon!
+        pokemon = filteredPokemon[indexPath.row]
         
+        performSegue(withIdentifier: "PokemonDetailVC", sender: pokemon)
     }
     
     // Parse each individual pokemon from csv file
@@ -107,6 +110,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     // Dismiss keyboard user presses Search
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PokemonDetailVC" {
+            if let detailsVC = segue.destination as? PokemonDetailViewController {
+                if let pokemon = sender as? Pokemon {
+                    detailsVC.pokemon = pokemon
+                }
+            }
+        }
     }
 
 }

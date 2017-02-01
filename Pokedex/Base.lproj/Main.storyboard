@@ -106,6 +106,9 @@
                             <constraint firstAttribute="trailing" secondItem="OhI-2m-z3O" secondAttribute="trailing" id="yPZ-1Y-Fye"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="gTI-bk-sXF" id="ONi-Pb-i28"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

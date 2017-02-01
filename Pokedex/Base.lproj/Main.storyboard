@@ -140,6 +140,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="gTI-bk-sXF" id="ONi-Pb-i28"/>
+                        <outlet property="searchBar" destination="OhI-2m-z3O" id="aI8-HA-D8p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

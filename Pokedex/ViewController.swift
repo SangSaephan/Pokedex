@@ -9,11 +9,13 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var pokemon = [Pokemon]()
+    var filteredPokemon = [Pokemon]()
     var musicPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
@@ -21,18 +23,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        searchBar.delegate = self
         
         parsePokemon()
         initMusic()
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pokemon.count
+        return filteredPokemon.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokeCell", for: indexPath) as! PokeCell
-        let pokemon = self.pokemon[indexPath.row]
+        let pokemon = self.filteredPokemon[indexPath.row]
         cell.configureCell(pokemon)
         return cell
     }
@@ -55,6 +58,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 
                 let pokemon = Pokemon(name: name, pokedexId: pokemonId)
                 self.pokemon.append(pokemon)
+                self.filteredPokemon.append(pokemon)
             }
         } catch let error as NSError {
             print(error.debugDescription)
@@ -87,6 +91,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
+    // Dismiss keyboard if the search bar has no text
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            view.endEditing(true)
+        }
+        
+        filteredPokemon = searchText.isEmpty ? pokemon : pokemon.filter({
+            $0.name.range(of: searchText, options: .caseInsensitive) != nil
+        })
+        
+        collectionView.reloadData()
+    }
+    
+    // Dismiss keyboard user presses Search
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
 
 }
 

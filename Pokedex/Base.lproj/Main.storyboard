@@ -8,6 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pokemon Solid.ttf">
+            <string>PokemonSolidNormal</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -23,9 +28,36 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3GC-1c-Mvf">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokedex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odr-LV-Yeb">
+                                        <rect key="frame" x="134" y="17" width="107" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="107" id="OJa-vR-bxX"/>
+                                            <constraint firstAttribute="height" constant="40" id="X11-wc-4OR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="28"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qQG-vW-XYz">
+                                        <rect key="frame" x="341" y="24" width="26" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="26" id="SRo-cA-7lP"/>
+                                            <constraint firstAttribute="height" constant="26" id="YSJ-Ii-vXy"/>
+                                        </constraints>
+                                        <state key="normal" image="music"/>
+                                        <connections>
+                                            <action selector="musicButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X6d-rn-iBc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="1" green="0.34509803921568627" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="odr-LV-Yeb" secondAttribute="bottom" constant="8" id="0Wd-ah-zyt"/>
                                     <constraint firstAttribute="height" constant="65" id="Gcx-Wv-CMF"/>
+                                    <constraint firstItem="odr-LV-Yeb" firstAttribute="centerX" secondItem="3GC-1c-Mvf" secondAttribute="centerX" id="Ogh-PL-2Nf"/>
+                                    <constraint firstAttribute="bottom" secondItem="qQG-vW-XYz" secondAttribute="bottom" constant="15" id="neB-PY-vRf"/>
+                                    <constraint firstAttribute="trailing" secondItem="qQG-vW-XYz" secondAttribute="trailing" constant="8" id="vJ4-b4-WGJ"/>
                                 </constraints>
                             </view>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="OhI-2m-z3O">
@@ -118,5 +150,6 @@
     <resources>
         <image name="150" width="120" height="120"/>
         <image name="bg" width="1920" height="1200"/>
+        <image name="music" width="100" height="100"/>
     </resources>
 </document>

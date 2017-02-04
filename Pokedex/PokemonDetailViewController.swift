@@ -29,6 +29,19 @@ class PokemonDetailViewController: UIViewController {
         super.viewDidLoad()
 
         pokemonLabel.text = pokemon.name.capitalized
+        pokedexIdLabel.text = "\(pokemon.pokedexId)"
+        
+        pokemon.downloadPokemonDetails {
+            self.updateUI()
+        }
+    }
+    
+    func updateUI() {
+        typeLabel.text = pokemon.type
+        defenseLabel.text = pokemon.defense
+        heightLabel.text = pokemon.height
+        weightLabel.text = pokemon.weight
+        attackLabel.text = pokemon.attack
     }
 
     @IBAction func backButtonPressed(_ sender: UIButton) {

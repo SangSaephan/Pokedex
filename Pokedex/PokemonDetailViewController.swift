@@ -11,6 +11,18 @@ import UIKit
 class PokemonDetailViewController: UIViewController {
     
     @IBOutlet weak var pokemonLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var defenseLabel: UILabel!
+    @IBOutlet weak var heightLabel: UILabel!
+    @IBOutlet weak var pokedexIdLabel: UILabel!
+    @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var attackLabel: UILabel!
+    @IBOutlet weak var evolutionLabel: UILabel!
+    @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var previousEvoImageView: UIImageView!
+    @IBOutlet weak var nextEvoImageView: UIImageView!
+    
     var pokemon: Pokemon!
 
     override func viewDidLoad() {
@@ -19,4 +31,7 @@ class PokemonDetailViewController: UIViewController {
         pokemonLabel.text = pokemon.name.capitalized
     }
 
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
 }

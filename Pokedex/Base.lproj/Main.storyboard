@@ -172,6 +172,7 @@
                                         </constraints>
                                         <state key="normal" image="back"/>
                                         <connections>
+                                            <action selector="backButtonPressed:" destination="OBx-Za-Mcw" eventType="touchUpInside" id="yPj-v7-9jF"/>
                                             <action selector="musicButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9cV-a6-pyx"/>
                                         </connections>
                                     </button>
@@ -433,7 +434,18 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="attackLabel" destination="3cn-Yk-gji" id="3x7-dz-Ufl"/>
+                        <outlet property="defenseLabel" destination="Yn4-Bi-N6j" id="q3w-z5-UMp"/>
+                        <outlet property="descriptionLabel" destination="9s4-NG-yto" id="aXP-tu-pCq"/>
+                        <outlet property="evolutionLabel" destination="tz2-ma-edD" id="noy-5d-1Ry"/>
+                        <outlet property="heightLabel" destination="pCl-Xg-hZy" id="e9I-VL-1Rh"/>
+                        <outlet property="mainImageView" destination="yoI-ve-vCT" id="eU1-gA-VSv"/>
+                        <outlet property="nextEvoImageView" destination="J9g-Wj-j07" id="05o-pR-9CU"/>
+                        <outlet property="pokedexIdLabel" destination="8jK-Mx-Hnr" id="o2h-j9-43O"/>
                         <outlet property="pokemonLabel" destination="ohn-y1-e9I" id="9KW-yC-hjm"/>
+                        <outlet property="previousEvoImageView" destination="umx-ev-QyN" id="rys-5k-ZRA"/>
+                        <outlet property="typeLabel" destination="MVU-ZE-DiS" id="Oj2-sT-wyX"/>
+                        <outlet property="weightLabel" destination="BZ9-Uk-sWw" id="bsj-SG-nSt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DN2-Nf-Bug" userLabel="First Responder" sceneMemberID="firstResponder"/>

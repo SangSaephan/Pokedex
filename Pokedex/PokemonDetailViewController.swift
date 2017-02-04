@@ -30,6 +30,8 @@ class PokemonDetailViewController: UIViewController {
 
         pokemonLabel.text = pokemon.name.capitalized
         pokedexIdLabel.text = "\(pokemon.pokedexId)"
+        mainImageView.image = UIImage(named: "\(pokemon.pokedexId)")
+        previousEvoImageView.image = UIImage(named: "\(pokemon.pokedexId)")
         
         pokemon.downloadPokemonDetails {
             self.updateUI()
@@ -42,6 +44,15 @@ class PokemonDetailViewController: UIViewController {
         heightLabel.text = pokemon.height
         weightLabel.text = pokemon.weight
         attackLabel.text = pokemon.attack
+        evolutionLabel.text = "Next Evolution: \(pokemon.evolution)"
+        descriptionLabel.text = pokemon.description
+        
+        // If a next evolution exists, set its image
+        if pokemon.evolution != "N/A" {
+            nextEvoImageView.image = UIImage(named: "\(pokemon.pokedexId + 1)")
+        } else {
+            nextEvoImageView.isHidden = true
+        }
     }
 
     @IBAction func backButtonPressed(_ sender: UIButton) {

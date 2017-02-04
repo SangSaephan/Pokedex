@@ -94,12 +94,35 @@ class Pokemon {
     // Download Pokemon information
     func downloadPokemonDetails(completed: @escaping DownloadComplete) {
         Alamofire.request(_pokemonUrl).responseJSON { response in
-            print(response.result)
             if let dictionary = response.result.value as? Dictionary<String, Any> {
+                
+                if let description = dictionary["descriptions"] as? [Dictionary<String, Any>] {
+                    if let resourceUri = description[0]["resource_uri"] as? String {
+                        let url = "\(BASE_URL)\(resourceUri)"
+                        
+                        Alamofire.request(url).responseJSON(completionHandler: { response in
+                            if let descriptionDict = response.result.value as? Dictionary<String, Any> {
+                                if let descriptionText = descriptionDict["description"] as? String {
+                                    self._description = descriptionText.replacingOccurrences(of: "POKMON", with: "Pokemon").replacingOccurrences(of: "POK BALLS", with: "Pokeballs")
+                                }
+                            }
+                            completed()
+                        })
+                    }
+                }
                 
                 if let type = dictionary["types"] as? [Dictionary<String, Any>] {
                     if let typeName = type[0]["name"] as? String {
                         self._type = typeName.capitalized
+                    }
+                    
+                    // Concatenate addition types, if any
+                    if type.count > 1 {
+                        for index in 1..<type.count {
+                            if let name = type[index]["name"] as? String {
+                                self._type! += "/\(name.capitalized)"
+                            }
+                        }
                     }
                 }
                 
@@ -117,6 +140,31 @@ class Pokemon {
                 
                 if let attack = dictionary["attack"] as? Int {
                     self._attack = "\(attack)"
+                }
+                
+                if let evolution = dictionary["evolutions"] as? [Dictionary<String, Any>] {
+                    
+                    // Check for empty array since some Pokemon from the API are returning empty arrays
+                    if evolution.isEmpty {
+                        self._evolution = "N/A"
+                    } else {
+                        let nextEvo = evolution[0]
+                        // Some pokemon evolve by leveling up, others by stone. We make this check
+                        if let level = nextEvo["level"] as? Int {
+                            if let name = nextEvo["to"] as? String {
+                                self._evolution = "\(name) at level \(level)"
+                            }
+                        } else if let method = nextEvo["method"] as? String {
+                            // There are some unrealistic evolutions, so we dont set those
+                            if method != "stone" {
+                                self._evolution = "N/A"
+                            } else {
+                                if let name = nextEvo["to"] as? String {
+                                    self._evolution = "\(name) by \(method)"
+                                }
+                            }
+                        }
+                    }
                 }
             }
             completed()

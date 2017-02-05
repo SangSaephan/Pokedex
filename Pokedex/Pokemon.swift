@@ -20,6 +20,7 @@ class Pokemon {
     private var _attack: String!
     private var _evolution: String!
     private var _pokemonUrl: String!
+    private var _moves = [String]()
     
     var name: String {
         return _name
@@ -85,6 +86,10 @@ class Pokemon {
         return _evolution
     }
     
+    var moves: [String] {
+        return _moves
+    }
+    
     init(name: String, pokedexId: Int) {
         self._name = name
         self._pokedexId = pokedexId
@@ -116,7 +121,7 @@ class Pokemon {
                         self._type = typeName.capitalized
                     }
                     
-                    // Concatenate addition types, if any
+                    // Concatenate additional types, if any
                     if type.count > 1 {
                         for index in 1..<type.count {
                             if let name = type[index]["name"] as? String {
@@ -164,6 +169,14 @@ class Pokemon {
                                 }
                             }
                         }
+                    }
+                }
+                
+                if let move = dictionary["moves"] as? [Dictionary<String, Any>] {
+                    
+                    // Retrieve five moves, starting from the end count
+                    for index in (move.count - 5 ... move.count - 1).reversed() {
+                        self._moves.append(move[index]["name"]! as! String)
                     }
                 }
             }

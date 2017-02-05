@@ -22,6 +22,12 @@ class PokemonDetailViewController: UIViewController {
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var previousEvoImageView: UIImageView!
     @IBOutlet weak var nextEvoImageView: UIImageView!
+    @IBOutlet weak var movesView: UIView!
+    @IBOutlet weak var move1Label: UILabel!
+    @IBOutlet weak var move2Label: UILabel!
+    @IBOutlet weak var move3Label: UILabel!
+    @IBOutlet weak var move4Label: UILabel!
+    @IBOutlet weak var move5Label: UILabel!
     
     var pokemon: Pokemon!
 
@@ -53,9 +59,26 @@ class PokemonDetailViewController: UIViewController {
         } else {
             nextEvoImageView.isHidden = true
         }
+        
+        move1Label.text = pokemon.moves[0]
+        move2Label.text = pokemon.moves[1]
+        move3Label.text = pokemon.moves[2]
+        move4Label.text = pokemon.moves[3]
+        move5Label.text = pokemon.moves[4]
     }
 
     @IBAction func backButtonPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func segmentControlChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            movesView.isHidden = true
+        case 1:
+            movesView.isHidden = false
+        default:
+            break
+        }
     }
 }
